@@ -1,0 +1,13 @@
+# Python
+venv/
+*.pyc
+__pycache__/
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# Database
+*.sqlite3
