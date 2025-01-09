@@ -1,7 +1,8 @@
 from openai import OpenAI
+import os
 
 client = OpenAI(api_key="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")
-import os
+
 
 # Load OpenAI API key from environment variables
 openai_api_key = os.getenv("OPENAI_API_KEY")
@@ -29,7 +30,11 @@ def get_random_word_with_details():
                 "- History:\n"
                 "- Origin:\n"
                 "- Subject/Field:\n"
-                "- Sentence:"
+                "- Synonyms:\n"
+                "- Antonyms:\n"
+                "- Connotation (positive, neutral, or negative):\n"
+                "- Denotation (literal meaning):\n"
+                "- Example sentence using the word:"
                 ),
             },
         ],
