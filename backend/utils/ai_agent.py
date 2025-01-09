@@ -11,19 +11,23 @@ if not openai_api_key:
     raise ValueError("OPENAI_API_KEY is not set. Please set it in your environment variables.")
 
 
-def get_random_word_with_details():
+def get_random_word_with_details(subject_prompt: str = ""):
     """
     Generate a random word and its detailed explanation using OpenAI's updated API.
     """
     try:
         response = client.chat.completions.create(model="gpt-4",  # Use "gpt-4" or "gpt-3.5-turbo"
         messages=[
-            {"role": "system", "content": "You are an English tutor. Provide users with random words to learn."},
             {
-            "role": "user",
-            "content": (
-                "You are an English tutor. Your job is to teach users new words."
-                "Provide a different random English word each time and explain it.\n"
+                    "role": "system",
+                    "content": (
+                        "You are an English tutor. Provide detailed information about random words."
+                    )
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Give me a random English word{subject_prompt} and explain it in the following format:\n"
                 "\n- Word:\n"
                 "- Prefix:\n"
                 "- Suffix:\n"
@@ -38,10 +42,10 @@ def get_random_word_with_details():
                 ),
             },
         ],
-        max_tokens=200,
-        temperature=0.9)
-       
-        # Properly access the response message content
+        max_tokens=300,
+        temperature=1.0,
+    )
+    # Properly access the response message content
         content = response.choices[0].message.content.strip()
         return content
     except Exception as e:
